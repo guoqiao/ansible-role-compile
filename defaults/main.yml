@@ -1,0 +1,47 @@
+---
+# defaults file for role
+
+# generic and default pkg name, e.g: python3, vim, nginx
+pkg_name: "pkg"
+
+# pkgs for apt-get build-dep, override if differ from pkg_name
+builddep_pkgs_apt: ["{{pkg_name}}"]
+# extra deps to install with apt
+extradep_pkgs_apt: []
+
+# pkgs for yum-builddep, override if differ from pkg_name
+builddep_pkgs_yum: ["{{pkg_name}}"]
+# extra deps to install with yum
+extradep_pkgs_yum: []
+
+# pkgs for dnf builddep, override if differ from pkg_name
+builddep_pkgs_dnf: ["{{pkg_name}}"]
+# extra deps to install with dnf
+extradep_pkgs_dnf: []
+
+# git repo url to clone
+git_repo_url: https://github.com/USER/REPO.git
+
+# git repo version(branch, tag or commit),  e.g.: v3.6.8
+git_repo_version: master
+
+# make git clone faster
+git_repo_depth: 1
+
+# git clone dest
+git_repo_dest: /tmp/{{pkg_name}}
+
+# command to distclean
+command_distclean: make distclean
+
+# command to configure
+command_configure: ./configure
+
+# command to compile
+command_compile: make -s -j
+
+# command to install
+command_install: make install
+
+# command to check version after install
+command_version: "{{pkg_name}} --version"

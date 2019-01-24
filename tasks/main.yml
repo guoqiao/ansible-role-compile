@@ -1,0 +1,177 @@
+---
+# tasks file for ansible-role-compile
+
+- name: gather facts
+  setup:
+  tags: always
+
+- debug: var=vars
+
+
+- name: install builddep for apt based systems
+  become: yes
+  when: 'ansible_pkg_mgr == "apt"'
+  tags: apt
+  block:
+
+    - name: define util pkgs for apt
+      set_fact:
+        util_pkgs:
+          - build-essential
+          - python3-apt
+          - python3-pip
+          - python3-dev
+
+    - name: define pkgs for apt
+      set_fact:
+        pkgs: "{{ util_pkgs + extradep_pkgs_apt }}"
+
+    - name: 'apt install {{ pkgs|join(" ") }}'
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        state: latest
+        name: "{{ pkgs }}"
+      register: task
+      retries: 3
+      delay: 1
+      until: task is success
+
+    - name: apt repository enable source pkgs
+      # deps on python[3]-apt
+      apt_repository:
+        repo: deb-src http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }} main
+
+    - name: 'apt-get build-dep {{ builddep_pkgs_apt|join(" ") }}'
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        state: build-dep
+        # apt.name support list, so no need to join
+        name: "{{ builddep_pkgs_apt }}"
+      register: task
+      retries: 3
+      delay: 1
+      until: task is success
+
+
+- name: install builddep for yum based systems
+  become: yes
+  when: 'ansible_pkg_mgr == "yum"'
+  tags: yum
+  block:
+
+    - name: remove yum.pid
+      file:
+        path: /var/run/yum.pid
+        state: absent
+
+    - name: define util pkgs for yum
+      set_fact:
+        util_pkgs:
+          - "@Development Tools"
+          - yum-utils
+
+    - name: define pkgs for yum
+      set_fact:
+        pkgs: "{{ util_pkgs + extradep_pkgs_yum }}"
+
+    - name: yum install
+      yum:
+        name: "{{ item }}"
+      loop: "{{ pkgs }}"
+      register: task
+      retries: 3
+      delay: 1
+      until: task is success
+
+    - name: 'yum-builddep {{ builddep_pkgs_yum|join(" ") }}'
+      command: 'yum-builddep {{ builddep_pkgs_yum|join(" ") }}'
+
+
+- name: install builddep for dnf based systems
+  become: yes
+  when: 'ansible_pkg_mgr == "dnf"'
+  tags: dnf
+  block:
+
+    - name: define util pkgs for dnf
+      set_fact:
+        util_pkgs:
+          - dnf-plugins-core
+
+    - name: define pkgs for dnf
+      set_fact:
+        pkgs: "{{ util_pkgs + extradep_pkgs_dnf }}"
+
+    - name: dnf install
+      dnf:
+        name: "{{ item }}"
+      loop: "{{ pkgs }}"
+      register: task
+      retries: 3
+      delay: 1
+      until: task is success
+
+    - name: 'dnf builddep {{ builddep_pkgs_dnf|join(" ") }}'
+      command: 'dnf builddep {{ builddep_pkgs_dnf|join(" ") }}'
+
+
+- name: install git
+  package:
+    name: git
+    state: present
+  register: task
+  retries: 3
+  delay: 1
+  until: task is success
+
+
+- name: 'git clone -b {{ git_repo_version }} --depth {{ git_repo_depth }} {{ git_repo_url }} {{ git_repo_dest }}'
+  tags: git-clone
+  git:
+    repo: "{{ git_repo_url }}"
+    dest: "{{ git_repo_dest }}"
+    version: "{{ git_repo_version }}"
+    depth: "{{ git_repo_depth }}"
+
+
+- name: 'run "{{ command_distclean }}"  in {{ git_repo_dest }}'
+  tags:
+    - pkg-distclean
+  become: yes
+  command: "{{ command_distclean }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
+  failed_when: false
+
+
+- name: 'run "{{ command_configure }}"  in {{ git_repo_dest }}'
+  tags:
+    - pkg-configure
+  command: "{{ command_configure }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
+
+
+- name: 'run "{{ command_compile }}"  in {{ git_repo_dest }}'
+  tags:
+    - pkg-compile
+  command: "{{ command_compile }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
+
+- name: 'run "{{ command_install }}"  in {{ git_repo_dest }}'
+  tags:
+    - pkg-install
+  become: yes
+  command: "{{ command_install }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
+
+
+- name: 'run "{{ command_version }}"'
+  tags:
+    - pkg-version
+  command: "{{ command_version }}"
+  when: 'command_version is defined'
