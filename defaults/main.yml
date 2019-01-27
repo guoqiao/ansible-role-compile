@@ -31,8 +31,8 @@ git_repo_depth: 1
 # git clone dest
 git_repo_dest: /tmp/{{pkg_name}}
 
-# command to distclean
-command_distclean: make distclean
+# command to distclean, always ignore exit code
+command_distclean: make --ignore-errors distclean
 
 # command to configure
 command_configure: ./configure

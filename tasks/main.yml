@@ -142,7 +142,7 @@
   args:
     chdir: "{{ git_repo_dest }}"
   loop:
-      - "{{ command_distclean }} || true"
+      - "{{ command_distclean }}"
       - "{{ command_configure }}"
       - "{{ command_compile }}"
       - "{{ command_install }}"
