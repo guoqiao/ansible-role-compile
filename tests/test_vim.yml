@@ -1,0 +1,12 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: localhost
+  vars:
+    # have to use system python3
+    ansible_python_interpreter: /usr/bin/python3
+  tasks:
+
+    - name: build vim
+      include_role:
+        name: guoqiao.xbuild
+        vars_from: vim
