@@ -1,5 +1,7 @@
 ---
 # defaults file for role
+# still build when pkg exists
+xbuild_force: yes
 
 # generic and default pkg name, e.g: python3, vim, nginx
 pkg_name: "pkg"
