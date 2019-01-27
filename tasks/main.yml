@@ -85,8 +85,8 @@
       delay: 1
       until: task is success
 
-    - name: 'yum-builddep {{ builddep_pkgs_yum|join(" ") }}'
-      command: 'yum-builddep {{ builddep_pkgs_yum|join(" ") }}'
+    - name: 'yum-builddep -y -q {{ builddep_pkgs_yum|join(" ") }}'
+      command: 'yum-builddep -y -q {{ builddep_pkgs_yum|join(" ") }}'
 
 
 - name: install builddep for dnf based systems
