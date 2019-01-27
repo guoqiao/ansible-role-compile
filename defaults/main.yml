@@ -37,8 +37,8 @@ command_distclean: make --ignore-errors distclean
 # command to configure
 command_configure: ./configure
 
-# command to compile
-command_compile: make -s -j
+# command to compile, limit jobs to 2 to avoid memory allocate issue
+command_compile: make -j 2
 
 # command to install
 command_install: make install
