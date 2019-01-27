@@ -44,7 +44,7 @@ command_compile: make -s -j
 command_install: make install
 
 # command to link
-command_link: ldconfig
+command_link: ldconfig --ignore-aux-cache --verbose
 
 # command to check version after install
 command_version: "{{pkg_name}} --version"
