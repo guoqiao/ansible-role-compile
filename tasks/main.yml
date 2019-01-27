@@ -136,42 +136,15 @@
     depth: "{{ git_repo_depth }}"
 
 
-- name: 'run "{{ command_distclean }}"  in {{ git_repo_dest }}'
-  tags:
-    - pkg-distclean
+- name: 'run build commands in loop'
   become: yes
-  command: "{{ command_distclean }}"
+  command: "{{ item }}"
   args:
     chdir: "{{ git_repo_dest }}"
-  failed_when: false
-
-
-- name: 'run "{{ command_configure }}"  in {{ git_repo_dest }}'
-  tags:
-    - pkg-configure
-  command: "{{ command_configure }}"
-  args:
-    chdir: "{{ git_repo_dest }}"
-
-
-- name: 'run "{{ command_compile }}"  in {{ git_repo_dest }}'
-  tags:
-    - pkg-compile
-  command: "{{ command_compile }}"
-  args:
-    chdir: "{{ git_repo_dest }}"
-
-- name: 'run "{{ command_install }}"  in {{ git_repo_dest }}'
-  tags:
-    - pkg-install
-  become: yes
-  command: "{{ command_install }}"
-  args:
-    chdir: "{{ git_repo_dest }}"
-
-
-- name: 'run "{{ command_version }}"'
-  tags:
-    - pkg-version
-  command: "{{ command_version }}"
-  when: 'command_version is defined'
+  loop:
+      - "{{ command_distclean }} || true"
+      - "{{ command_configure }}"
+      - "{{ command_compile }}"
+      - "{{ command_install }}"
+      - "{{ command_link }}"
+      - "{{ command_version }}"
