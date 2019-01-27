@@ -1,0 +1,7 @@
+---
+pkg_name: vim
+git_repo_url: https://github.com/vim/vim.git
+command_configure: >
+  ./configure
+  --enable-python3interp=yes
+  --with-python3-command=python3

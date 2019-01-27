@@ -1,0 +1,19 @@
+---
+pkg_name: "python3"
+builddep_pkgs_apt: ["python3-defaults"]
+extradep_pkgs_apt: ["libffi-dev"]
+builddep_pkgs_yum: ["python"]
+extradep_pkgs_yum: ["libffi-devel"]
+builddep_pkgs_dnf: ["python3"]
+extradep_pkgs_dnf: ["libffi-devel"]
+
+git_repo_url: https://github.com/python/cpython.git
+git_repo_version: v3.7.2
+
+command_configure: >
+  ./configure
+  --prefix=/usr/local
+  --enable-shared
+  --with-pymalloc
+
+command_check: "/usr/local/bin/python3 -VV"
