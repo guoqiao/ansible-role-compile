@@ -43,5 +43,8 @@ command_compile: make -s -j
 # command to install
 command_install: make install
 
+# command to link
+command_link: ldconfig
+
 # command to check version after install
 command_version: "{{pkg_name}} --version"
