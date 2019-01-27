@@ -1,0 +1,11 @@
+---
+
+- name: check pkg
+  shell: which {{pkg_name}}
+  failed_when: false
+  changed_when: false
+  register: which
+
+- name: include tasks if forced or not available
+  include_tasks: _main.yml
+  when: 'xbuild_force or which.rc != 0'
