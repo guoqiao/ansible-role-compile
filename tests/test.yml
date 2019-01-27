@@ -29,7 +29,7 @@
           --prefix=/usr/local
           --enable-shared
           --with-pymalloc
-        command_version: "python3 -VV"
+        command_check: "python3 -VV"
 
     - name: build vim
       include_role:

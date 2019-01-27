@@ -147,4 +147,4 @@
       - "{{ command_compile }}"
       - "{{ command_install }}"
       - "{{ command_link }}"
-      - "{{ command_version }}"
+      - "{{ command_check }}"

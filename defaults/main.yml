@@ -47,4 +47,4 @@ command_install: make install
 command_link: ldconfig --ignore-aux-cache --verbose
 
 # command to check version after install
-command_version: "{{pkg_name}} --version"
+command_check: "{{pkg_name}} --version"
