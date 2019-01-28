@@ -110,6 +110,14 @@
     version: "{{ git_repo_version }}"
     depth: "{{ git_repo_depth }}"
 
+- name: create ld conf file
+  become: yes
+  copy:
+    dest: /etc/ld.so.conf.d/ansbile-role-xbuild.conf
+    content: |
+      /usr/local/lib
+      /usr/lib
+      /lib
 
 - name: 'run build commands in loop'
   become: yes
