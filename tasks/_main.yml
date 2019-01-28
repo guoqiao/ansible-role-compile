@@ -28,9 +28,20 @@
       delay: 1
       until: task is success
 
+    - name: define _source_url for ubuntu
+      when: 'ansible_os_family == "Ubuntu"'
+      set_fact:
+        _source_url: http://archive.ubuntu.com/ubuntu/
+
+    - name: define _source_url for debian
+      when: 'ansible_os_family == "Debian"'
+      set_fact:
+        _source_url: http://deb.debian.org/debian
+
     - name: apt repository enable source pkgs
+      when: 'ansible_os_family == "Ubuntu"'
       apt_repository:
-        repo: deb-src http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }} main
+        repo: "deb-src {{ _source_url }} {{ ansible_lsb.codename }} main"
 
     - name: apt-get build-dep
       apt:
