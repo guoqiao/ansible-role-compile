@@ -4,15 +4,17 @@ git_repo_url: https://gitlab.com/catalyst-samba/samba.git
 command_check: /usr/local/samba/sbin/samba --version
 
 extra_pkgs:
+  # ansbile apt module support * in name
   apt:
     - lmdb-utils
     - liblmdb-dev
     - libgpgme11-dev
-    - python-gpgme
-    - python3-gpgme
+    # switch to python[3]-gpg since 1804
+    # - python*-gpg*
     - libjansson-dev
     - libtasn1-bin
-    - libgnutls-dev
+    # libgnutls28-dev for debian8
+    - libgnutls*-dev
   yum:
     - lmdb-devel
     - gpgme-devel
