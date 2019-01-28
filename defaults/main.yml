@@ -54,6 +54,7 @@ _util_pkgs:
   apt:
     - aptitude
     - build-essential
+    - make
     - git
     - htop
     - tree
@@ -70,6 +71,7 @@ _util_pkgs:
     - "@Development Tools"
     - yum-utils
     - epel-release
+    - make
     - git
     - vim
     - wget
@@ -78,6 +80,7 @@ _util_pkgs:
     - libffi-devel
   dnf:
     - dnf-plugins-core
+    - make
     - git
     - vim
     - wget
