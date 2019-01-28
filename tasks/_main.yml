@@ -4,6 +4,14 @@
   tags: always
   setup:
 
+- name: update environment
+  become: yes
+  copy:
+    content: |
+      PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      CC="ccache gcc"
+    dest: /etc/environment
+    force: yes
 
 - name: define pkgs
   tags: always
@@ -151,8 +159,6 @@
 
 - name: run command compile
   become: no
-  environment:
-    CC: "ccache gcc"
   command: "{{ command_compile }}"
   args:
     chdir: "{{ git_repo_dest }}"
