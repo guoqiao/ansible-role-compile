@@ -135,15 +135,41 @@
       /usr/lib
       /lib
 
-- name: 'run build commands in loop'
-  become: yes
-  shell: "{{ item }}"
+- name: run command distclean
+  become: no
+  failed_when: false
+  command: "{{ command_distclean }}"
   args:
     chdir: "{{ git_repo_dest }}"
-  loop:
-      - "{{ command_distclean }} || true"
-      - "{{ command_configure }}"
-      - "{{ command_compile }}"
-      - "{{ command_install }}"
-      - "{{ command_link }}"
-      - "{{ command_check }}"
+
+- name: run command configure
+  become: no
+  command: "{{ command_configure }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
+
+- name: run command compile
+  become: no
+  environment:
+    CC: "ccache gcc"
+  command: "{{ command_compile }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
+
+- name: run command install
+  become: yes
+  command: "{{ command_install }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
+
+- name: run command link
+  become: yes
+  command: "{{ command_link }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
+
+- name: run command check
+  become: no
+  command: "{{ command_check }}"
+  args:
+    chdir: "{{ git_repo_dest }}"
