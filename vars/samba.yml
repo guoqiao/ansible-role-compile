@@ -12,15 +12,18 @@ extra_pkgs:
     - python3-gpgme
     - libjansson-dev
     - libtasn1-bin
+    - libgnutls-dev
   yum:
     - lmdb-devel
     - gpgme-devel
     - pygpgme
     - jansson-devel
     - libtasn1-devel
+    - gnutls-devel
   dnf:
     - lmdb-devel
     - gpgme-devel
     - pygpgme
     - jansson-devel
     - libtasn1-devel
+    - gnutls-devel
