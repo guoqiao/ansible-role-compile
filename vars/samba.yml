@@ -1,0 +1,4 @@
+---
+pkg_name: samba
+git_repo_url: https://gitlab.com/catalyst-samba/samba.git
+command_check: /usr/local/samba/sbin/samba --version
