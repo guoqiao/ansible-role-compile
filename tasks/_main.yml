@@ -5,22 +5,22 @@
   tags: always
 
 
-- name: install pkgs
-  become: yes
-  package:
-    name: "{{item}}"
-  loop: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
-  register: task
-  retries: 3
-  delay: 1
-  until: task is success
-
-
 - name: apt builddep
   become: yes
   when: 'ansible_pkg_mgr == "apt"'
   tags: apt
   block:
+
+    - name: apt install
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        state: latest
+        name: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
+      register: task
+      retries: 3
+      delay: 1
+      until: task is success
 
     - name: apt repository enable source pkgs
       apt_repository:
@@ -50,6 +50,16 @@
         path: /var/run/yum.pid
         state: absent
 
+    - name: yum install
+      yum:
+        update_cache: yes
+        state: latest
+        name: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
+      register: task
+      retries: 3
+      delay: 1
+      until: task is success
+
     - name: yum-builddep
       command: 'yum-builddep -y -q {{ builddep_pkgs[ansible_pkg_mgr]|join(" ") }}'
 
@@ -60,8 +70,20 @@
   tags: dnf
   block:
 
+    - name: dnf install
+      command: 'dnf install --assumeyes {{item}}'
+      loop: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
+      register: task
+      retries: 3
+      delay: 1
+      until: task is success
+
     - name: dnf builddep
-      command: 'dnf builddep {{ builddep_pkgs[ansible_pkg_mgr]|join(" ") }}'
+      command: 'dnf builddep --assumeyes {{ builddep_pkgs[ansible_pkg_mgr]|join(" ") }}'
+      register: task
+      retries: 3
+      delay: 1
+      until: task is success
 
 
 - name: 'git clone -b {{ git_repo_version }} --depth {{ git_repo_depth }} {{ git_repo_url }} {{ git_repo_dest }}'
