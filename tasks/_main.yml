@@ -113,11 +113,11 @@
 
 - name: 'run build commands in loop'
   become: yes
-  command: "{{ item }}"
+  shell: "{{ item }}"
   args:
     chdir: "{{ git_repo_dest }}"
   loop:
-      - "{{ command_distclean }}"
+      - "{{ command_distclean }} || true"
       - "{{ command_configure }}"
       - "{{ command_compile }}"
       - "{{ command_install }}"
