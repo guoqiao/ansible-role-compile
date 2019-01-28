@@ -1,0 +1,5 @@
+#!/usr/bin/env ansible-playbook
+---
+- import_playbook: test_python3.yml
+- import_playbook: test_vim.yml
+- import_playbook: test_samba.yml
