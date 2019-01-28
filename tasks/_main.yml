@@ -6,6 +6,7 @@
 
 
 - name: install pkgs
+  become: yes
   package:
     name: "{{item}}"
   loop: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
