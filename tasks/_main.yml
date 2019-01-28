@@ -4,6 +4,11 @@
   setup:
   tags: always
 
+- name: define pkgs
+  tags: always
+  set_fact:
+    _extra_pkgs: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
+    _builddep_pkgs: "{{ builddep_pkgs[ansible_pkg_mgr] }}"
 
 - name: apt builddep
   become: yes
@@ -16,7 +21,7 @@
         update_cache: yes
         cache_valid_time: 3600
         state: latest
-        name: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
+        name: "{{ _extra_pkgs }}"
       register: task
       retries: 3
       delay: 1
@@ -32,7 +37,7 @@
         cache_valid_time: 3600
         state: build-dep
         # apt.name support list, so no need to join
-        name: "{{ builddep_pkgs[ansible_pkg_mgr] }}"
+        name: "{{ _builddep_pkgs }}"
       register: task
       retries: 3
       delay: 1
@@ -54,14 +59,14 @@
       yum:
         update_cache: yes
         state: latest
-        name: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
+        name: "{{ _extra_pkgs }}"
       register: task
       retries: 3
       delay: 1
       until: task is success
 
     - name: yum-builddep
-      command: 'yum-builddep -y -q {{ builddep_pkgs[ansible_pkg_mgr]|join(" ") }}'
+      command: 'yum-builddep -y -q {{ _builddep_pkgs|join(" ") }}'
 
 
 - name: dnf builddep
@@ -71,15 +76,14 @@
   block:
 
     - name: dnf install
-      command: 'dnf install --assumeyes {{item}}'
-      loop: "{{ _util_pkgs[ansible_pkg_mgr] + extra_pkgs[ansible_pkg_mgr] }}"
+      command: 'dnf install --assumeyes {{ _extra_pkgs|join(" ") }}'
       register: task
       retries: 3
       delay: 1
       until: task is success
 
     - name: dnf builddep
-      command: 'dnf builddep --assumeyes {{ builddep_pkgs[ansible_pkg_mgr]|join(" ") }}'
+      command: 'dnf builddep --assumeyes {{ _builddep_pkgs|join(" ") }}'
       register: task
       retries: 3
       delay: 1
