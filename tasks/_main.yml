@@ -1,8 +1,9 @@
 ---
 
 - name: gather facts
-  setup:
   tags: always
+  setup:
+
 
 - name: define pkgs
   tags: always
