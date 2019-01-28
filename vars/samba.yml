@@ -2,3 +2,25 @@
 pkg_name: samba
 git_repo_url: https://gitlab.com/catalyst-samba/samba.git
 command_check: /usr/local/samba/sbin/samba --version
+
+extra_pkgs:
+  apt:
+    - lmdb-utils
+    - liblmdb-dev
+    - libgpgme11-dev
+    - python-gpgme
+    - python3-gpgme
+    - libjansson-dev
+    - libtasn1-bin
+  yum:
+    - lmdb-devel
+    - gpgme-devel
+    - pygpgme
+    - jansson-devel
+    - libtasn1-devel
+  dnf:
+    - lmdb-devel
+    - gpgme-devel
+    - pygpgme
+    - jansson-devel
+    - libtasn1-devel
