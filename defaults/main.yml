@@ -28,7 +28,7 @@ git_repo_version: master
 git_repo_depth: 1
 
 # git clone dest
-git_repo_dest: /tmp/{{pkg_name}}
+git_repo_dest: "{{pkg_name}}"
 
 # command to distclean, always ignore exit code
 command_distclean: make --ignore-errors distclean
