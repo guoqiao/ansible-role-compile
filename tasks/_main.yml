@@ -109,6 +109,23 @@
     version: "{{ git_repo_version }}"
     depth: "{{ git_repo_depth }}"
 
+- name: chown repo tree
+  become: yes
+  file:
+    path: "{{ git_repo_dest }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    state: directory
+    recurse: yes
+
+- name: link ld to ld.gold
+  become: yes
+  file:
+    src: /usr/bin/ld.gold
+    dest: /usr/bin/ld
+    state: link
+    force: yes
+
 - name: create ld conf file
   become: yes
   copy:
