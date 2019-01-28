@@ -1,7 +1,7 @@
 ---
 
 - name: check pkg
-  shell: which {{pkg_name}}
+  command: which {{pkg_name}}
   failed_when: false
   changed_when: false
   register: which
