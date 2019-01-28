@@ -53,9 +53,12 @@ command_check: "{{pkg_name}} --version"
 _util_pkgs:
   apt:
     - aptitude
+    - apt-utils
     - build-essential
+    - ccache
     - make
     - git
+    - gcc
     - htop
     - tree
     - ncdu
@@ -71,8 +74,10 @@ _util_pkgs:
     - "@Development Tools"
     - yum-utils
     - epel-release
+    - ccache
     - make
     - git
+    - gcc
     - vim
     - wget
     - which
@@ -80,8 +85,10 @@ _util_pkgs:
     - libffi-devel
   dnf:
     - dnf-plugins-core
+    - ccache
     - make
     - git
+    - gcc
     - vim
     - wget
     - which
