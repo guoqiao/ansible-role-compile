@@ -27,8 +27,8 @@ git_repo_version: master
 # make git clone faster
 git_repo_depth: 1
 
-# git clone dest
-git_repo_dest: "{{pkg_name}}"
+# git clone dest, use abs path
+git_repo_dest: "{{ ansible_env.HOME }}/{{ pkg_name }}"
 
 # command to distclean, always ignore exit code
 command_distclean: make --ignore-errors distclean
