@@ -6,20 +6,17 @@ xbuild_force: yes
 # generic and default pkg name, e.g: python3, vim, nginx
 pkg_name: "pkg"
 
-# pkgs for apt-get build-dep, override if differ from pkg_name
-builddep_pkgs_apt: ["{{pkg_name}}"]
-# extra deps to install with apt
-extradep_pkgs_apt: []
+# pkgs passed to builddep cmd for this pkg
+builddep_pkgs:
+  apt: ["{{pkg_name}}"]
+  yum: ["{{pkg_name}}"]
+  dnf: ["{{pkg_name}}"]
 
-# pkgs for yum-builddep, override if differ from pkg_name
-builddep_pkgs_yum: ["{{pkg_name}}"]
-# extra deps to install with yum
-extradep_pkgs_yum: []
-
-# pkgs for dnf builddep, override if differ from pkg_name
-builddep_pkgs_dnf: ["{{pkg_name}}"]
-# extra deps to install with dnf
-extradep_pkgs_dnf: []
+# extra pkgs to install after builddep
+extra_pkgs:
+  apt: []
+  yum: []
+  dnf: []
 
 # git repo url to clone
 git_repo_url: https://github.com/USER/REPO.git
@@ -50,3 +47,40 @@ command_link: ldconfig --ignore-aux-cache --verbose
 
 # command to check version after install
 command_check: "{{pkg_name}} --version"
+
+# private util pkgs to always install for each pkg_mgr
+# you do not need to override this
+_util_pkgs:
+  apt:
+    - aptitude
+    - build-essential
+    - git
+    - htop
+    - tree
+    - ncdu
+    - vim
+    - wget
+    - silversearcher-ag
+    - python3-apt
+    - python3-pip
+    - python3-dev
+    - libffi-dev
+  yum:
+    - "@Development Tools"
+    - yum-utils
+    - epel-release
+    - git
+    - vim
+    - wget
+    - which
+    - zlib-devel
+    - libffi-devel
+  dnf:
+    - dnf-plugins-core
+    - git
+    - vim
+    - wget
+    - which
+    - zlib-devel
+    - libffi-devel
+
