@@ -75,6 +75,11 @@
         path: /var/run/yum.pid
         state: absent
 
+    - name: enable epel repo for yum
+      include_role:
+        # need to install this role first
+        name: geerlingguy.repo-epel
+
     - name: yum install
       yum:
         update_cache: yes
