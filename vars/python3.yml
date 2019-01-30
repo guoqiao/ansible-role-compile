@@ -4,7 +4,7 @@ pkg_name: "python3"
 builddep_pkgs:
   apt: ["python3-defaults"]
   yum: ["python"]
-  dnf: ["python3"]
+  dnf: ["python"]
 
 git_repo_url: https://github.com/python/cpython.git
 git_repo_version: v3.7.2
