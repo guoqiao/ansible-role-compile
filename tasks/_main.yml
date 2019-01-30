@@ -130,6 +130,7 @@
     dest: "{{ git_repo_dest }}"
     version: "{{ git_repo_version }}"
     depth: "{{ git_repo_depth }}"
+    force: yes
 
 - name: chown repo tree
   become: yes
