@@ -83,6 +83,8 @@ _util_pkgs:
     - which
     - zlib-devel
     - libffi-devel
+    # install dnf with yum
+    - dnf
   dnf:
     - dnf-plugins-core
     - ccache
@@ -94,3 +96,4 @@ _util_pkgs:
     - which
     - zlib-devel
     - libffi-devel
+    - python-dnf

@@ -109,7 +109,10 @@
   block:
 
     - name: dnf install
-      command: 'dnf install --assumeyes {{ _extra_pkgs|join(" ") }}'
+      dnf:
+        name: "{{ _extra_pkgs }}"
+        update_cache: yes
+        state: latest
       register: task
       retries: 3
       delay: 1
