@@ -21,6 +21,12 @@
     dest: /etc/default/locale
     force: yes
 
+- name: ensure locale
+  become: yes
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
 - name: check pkg
   command: which {{pkg_name}}
   failed_when: false
