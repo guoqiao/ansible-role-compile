@@ -6,6 +6,7 @@ command_check: /usr/local/samba/sbin/samba --version
 extra_pkgs:
   # ansbile apt module support * in name
   apt:
+    - python3-dev
     - lmdb-utils
     - liblmdb-dev
     - libgpgme11-dev
@@ -16,6 +17,7 @@ extra_pkgs:
     # libgnutls28-dev for debian8
     - libgnutls*-dev
   yum:
+    - python3*-devel
     - lmdb-devel
     - gpgme-devel
     - pygpgme
@@ -23,6 +25,7 @@ extra_pkgs:
     - libtasn1-devel
     - gnutls-devel
   dnf:
+    - python3*-devel
     - lmdb-devel
     - gpgme-devel
     - pygpgme

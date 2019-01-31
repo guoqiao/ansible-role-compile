@@ -83,8 +83,9 @@ _util_pkgs:
     - which
     - zlib-devel
     - libffi-devel
-    # install dnf with yum
-    - dnf
+    - python3*-devel
+    # install dnf with yum, only available since centos7
+    # - dnf
   dnf:
     - dnf-plugins-core
     - ccache
@@ -97,3 +98,4 @@ _util_pkgs:
     - zlib-devel
     - libffi-devel
     - python-dnf
+    - python3*-devel
