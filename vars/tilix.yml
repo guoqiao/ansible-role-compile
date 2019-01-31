@@ -1,0 +1,15 @@
+---
+pkg_name: tilix
+git_repo_url: https://github.com/gnunn1/tilix
+
+builddep_pkgs:
+  apt: []
+
+extra_pkgs:
+  apt: ["dub"]
+
+command_distclean: ls
+command_configure: ls
+command_compile: dub build --build=release
+command_install: ./install.sh
+command_check: ls

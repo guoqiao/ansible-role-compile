@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: xbuild
+  tasks:
+
+    - name: build tilix
+      include_role:
+        name: guoqiao.xbuild
+        vars_from: tilix
