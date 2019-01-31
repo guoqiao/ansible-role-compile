@@ -1,26 +1,5 @@
 ---
 
-- name: gather facts
-  tags: always
-  setup:
-
-- name: update environment
-  become: yes
-  copy:
-    content: |
-      PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      CC="ccache gcc"
-    dest: /etc/environment
-    force: yes
-
-- name: update locale
-  become: yes
-  copy:
-    content: |
-      LC_ALL=en_US.UTF-8
-    dest: /etc/default/locale
-    force: yes
-
 - name: define pkgs
   tags: always
   set_fact:
