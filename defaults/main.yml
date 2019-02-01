@@ -77,7 +77,6 @@ _util_pkgs:
     - yum-utils
     - epel-release
     - ccache
-    - locales
     - make
     - git
     - gcc
@@ -92,7 +91,6 @@ _util_pkgs:
   dnf:
     - dnf-plugins-core
     - ccache
-    - locales
     - make
     - git
     - gcc

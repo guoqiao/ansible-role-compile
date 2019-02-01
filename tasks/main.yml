@@ -13,12 +13,7 @@
     dest: /etc/environment
     force: yes
 
-- name: ensure locales installed
-  become: yes
-  package:
-    name: locales
-
-- name: update locale
+- name: update /etc/default/locale
   become: yes
   copy:
     content: |
@@ -26,11 +21,17 @@
     dest: /etc/default/locale
     force: yes
 
-- name: ensure locale
+- name: ensure locales installed
+  when: 'ansible_pkg_mgr == "apt"'
   become: yes
-  locale_gen:
-    name: en_US.UTF-8
-    state: present
+  block:
+    - name: apt install locales
+      apt:
+        name: locales
+    - name: run locale_gen
+      locale_gen:
+        name: en_US.UTF-8
+        state: present
 
 - name: check pkg
   command: which {{pkg_name}}
