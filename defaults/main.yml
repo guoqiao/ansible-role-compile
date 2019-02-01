@@ -76,6 +76,7 @@ _util_pkgs:
     - "@Development Tools"
     - yum-utils
     - epel-release
+    - binutils
     - ccache
     - make
     - git
@@ -90,6 +91,7 @@ _util_pkgs:
     # - dnf
   dnf:
     - dnf-plugins-core
+    - binutils
     - ccache
     - make
     - git
