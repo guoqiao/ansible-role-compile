@@ -57,6 +57,7 @@ _util_pkgs:
     - build-essential
     - ccache
     - make
+    - locales
     - git
     - gcc
     - htop
@@ -75,6 +76,7 @@ _util_pkgs:
     - yum-utils
     - epel-release
     - ccache
+    - locales
     - make
     - git
     - gcc
@@ -89,6 +91,7 @@ _util_pkgs:
   dnf:
     - dnf-plugins-core
     - ccache
+    - locales
     - make
     - git
     - gcc

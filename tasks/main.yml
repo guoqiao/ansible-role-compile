@@ -13,6 +13,11 @@
     dest: /etc/environment
     force: yes
 
+- name: ensure locales installed
+  become: yes
+  package:
+    name: locales
+
 - name: update locale
   become: yes
   copy:
