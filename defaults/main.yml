@@ -54,6 +54,7 @@ _util_pkgs:
   apt:
     - aptitude
     - apt-utils
+    - binutils
     - binutils-gold
     - build-essential
     - ccache
