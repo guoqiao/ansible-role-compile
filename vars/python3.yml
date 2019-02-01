@@ -13,6 +13,10 @@ command_configure: >
   ./configure
   --prefix=/usr/local
   --enable-shared
+  --enable-profiling
   --with-pymalloc
+  --with-pydebug
+  --with-libs='bzip'
+  --with-ensurepip=upgrade
 
 command_check: "/usr/local/bin/python3 -VV"
