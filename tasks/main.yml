@@ -33,12 +33,12 @@
         name: en_US.UTF-8
         state: present
 
-- name: check pkg
-  command: which {{pkg_name}}
+- name: run command check
+  command: "{{command_check}}"
   failed_when: false
   changed_when: false
-  register: which
+  register: check
 
 - name: include tasks if forced or not available
   include_tasks: _main.yml
-  when: 'xbuild_force or which.rc != 0'
+  when: 'xbuild_force or check.rc != 0'
