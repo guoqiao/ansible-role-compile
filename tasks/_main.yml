@@ -129,7 +129,8 @@
     src: /usr/bin/ld.gold
     dest: /usr/bin/ld
     state: link
-    force: yes
+    force: no
+  failed_when: no  # lg.gold may not exist
 
 - name: create ld conf file
   become: yes
