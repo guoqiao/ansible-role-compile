@@ -1,0 +1,10 @@
+---
+pkg_name: binutils
+git_repo_url: git://sourceware.org/git/binutils-gdb.git
+
+command_configure: >
+  ./configure
+  --enable-ld=yes
+  --enable-gold=yes
+
+command_check: "ld.gold --version"
