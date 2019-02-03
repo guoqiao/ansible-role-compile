@@ -77,6 +77,7 @@ _util_pkgs:
     - "@Development Tools"
     - yum-utils
     - epel-release
+    - centos-release-scl  # Software Collections
     - binutils
     - ccache
     - make
