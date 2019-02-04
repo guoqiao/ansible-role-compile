@@ -13,6 +13,7 @@ extra_pkgs:
     - libgpgme11-dev
     # switch to python[3]-gpg since 1804
     # - python*-gpg*
+    - libacl1-dev
     - libarchive-dev
     - libjansson-dev
     - libtasn1-bin
@@ -24,6 +25,7 @@ extra_pkgs:
     - gpgme-devel
     - pygpgme
     - jansson-devel
+    - libacl-devel
     - libtasn1-devel
     - libarchive-devel
     - gnutls-devel
@@ -33,6 +35,7 @@ extra_pkgs:
     - gpgme-devel
     - pygpgme
     - jansson-devel
+    - libacl-devel
     - libtasn1-devel
     - libarchive-devel
     - gnutls-devel
