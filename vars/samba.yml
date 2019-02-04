@@ -13,6 +13,7 @@ extra_pkgs:
     - libgpgme11-dev
     # switch to python[3]-gpg since 1804
     # - python*-gpg*
+    - libarchive-dev
     - libjansson-dev
     - libtasn1-bin
     # libgnutls28-dev for debian8
@@ -24,6 +25,7 @@ extra_pkgs:
     - pygpgme
     - jansson-devel
     - libtasn1-devel
+    - libarchive-devel
     - gnutls-devel
   dnf:
     - python3*-devel
@@ -32,4 +34,5 @@ extra_pkgs:
     - pygpgme
     - jansson-devel
     - libtasn1-devel
+    - libarchive-devel
     - gnutls-devel
