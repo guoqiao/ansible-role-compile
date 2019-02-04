@@ -15,6 +15,7 @@ extra_pkgs:
     # - python*-gpg*
     - libacl1-dev
     - libarchive-dev
+    - libldap2-dev
     - libjansson-dev
     - libtasn1-bin
     # libgnutls28-dev for debian8
@@ -28,6 +29,7 @@ extra_pkgs:
     - libacl-devel
     - libtasn1-devel
     - libarchive-devel
+    - openldap-devel
     - gnutls-devel
   dnf:
     - python3*-devel
@@ -38,4 +40,5 @@ extra_pkgs:
     - libacl-devel
     - libtasn1-devel
     - libarchive-devel
+    - openldap-devel
     - gnutls-devel
