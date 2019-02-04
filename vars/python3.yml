@@ -19,4 +19,4 @@ command_configure: >
   --with-libs='bzip'
   --with-ensurepip=upgrade
 
-command_check: "/usr/local/bin/python3 -VV"
+command_check: "python3 -VV"
