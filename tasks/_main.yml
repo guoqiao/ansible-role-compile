@@ -141,38 +141,38 @@
       /usr/lib
       /lib
 
-- name: run command distclean
+- name: run command distclean for {{pkg_name}}
   become: no
   failed_when: false
   command: "{{ command_distclean }}"
   args:
     chdir: "{{ git_repo_dest }}"
 
-- name: run command configure
+- name: run command configure for {{pkg_name}}
   become: no
   command: "{{ command_configure }}"
   args:
     chdir: "{{ git_repo_dest }}"
 
-- name: run command compile
+- name: run command compile for {{pkg_name}}
   become: no
   command: "{{ command_compile }}"
   args:
     chdir: "{{ git_repo_dest }}"
 
-- name: run command install
+- name: run command install for {{pkg_name}}
   become: yes
   command: "{{ command_install }}"
   args:
     chdir: "{{ git_repo_dest }}"
 
-- name: run command link
+- name: run command link for {{pkg_name}}
   become: yes
   command: "{{ command_link }}"
   args:
     chdir: "{{ git_repo_dest }}"
 
-- name: run command check
+- name: run command check for {{pkg_name}}
   become: no
   command: "{{ command_check }}"
   args:
