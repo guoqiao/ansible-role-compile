@@ -24,8 +24,8 @@ git_repo_url: https://github.com/USER/REPO.git
 # git repo version(branch, tag or commit),  e.g.: v3.6.8
 git_repo_version: master
 
-# make git clone faster
-git_repo_depth: 1
+# define it if you want to make git clone faster
+# git_repo_depth: 1
 
 # git clone dest, use abs path
 git_repo_dest: "{{ ansible_env.HOME }}/{{ pkg_name }}"
