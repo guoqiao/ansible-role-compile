@@ -1,6 +1,7 @@
 ---
 pkg_name: samba
 git_repo_url: https://gitlab.com/catalyst-samba/samba.git
+command_configure: ./configure.developer
 command_check: /usr/local/samba/sbin/samba --version
 
 extra_pkgs:
@@ -21,24 +22,38 @@ extra_pkgs:
     # libgnutls28-dev for debian8
     - libgnutls*-dev
   yum:
-    - python3*-devel
-    - lmdb-devel
-    - gpgme-devel
-    - pygpgme
-    - jansson-devel
-    - libacl-devel
-    - libtasn1-devel
-    - libarchive-devel
-    - openldap-devel
     - gnutls-devel
+    - gpgme-devel
+    - jansson-devel
+    - keyutils-libs-devel
+    - libacl-devel
+    - libaio-devel
+    - libarchive-devel
+    - libblkid-devel
+    - libtasn1-devel
+    - libxml2-devel
+    - libxslt-devel
+    - lmdb-devel
+    - openldap-devel
+    - pam-devel
+    - popt-devel
+    - pygpgme
+    - readline-devel
   dnf:
-    - python3*-devel
-    - lmdb-devel
-    - gpgme-devel
-    - pygpgme
-    - jansson-devel
-    - libacl-devel
-    - libtasn1-devel
-    - libarchive-devel
-    - openldap-devel
     - gnutls-devel
+    - gpgme-devel
+    - jansson-devel
+    - keyutils-libs-devel
+    - libacl-devel
+    - libaio-devel
+    - libarchive-devel
+    - libblkid-devel
+    - libtasn1-devel
+    - libxml2-devel
+    - libxslt-devel
+    - lmdb-devel
+    - openldap-devel
+    - pam-devel
+    - popt-devel
+    - pygpgme
+    - readline-devel
