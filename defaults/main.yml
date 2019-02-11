@@ -30,6 +30,9 @@ git_repo_version: master
 # git clone dest, use abs path
 git_repo_dest: "{{ ansible_env.HOME }}/{{ pkg_name }}"
 
+# force update the repo even it exists
+git_repo_force: "no"
+
 # command to distclean, always ignore exit code
 command_distclean: make --ignore-errors distclean
 

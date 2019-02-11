@@ -105,14 +105,14 @@
       until: task is success
 
 
-- name: 'git clone -b {{ git_repo_version }} --depth {{ git_repo_depth }} {{ git_repo_url }} {{ git_repo_dest }}'
+- name: git clone
   tags: git-clone
   git:
     repo: "{{ git_repo_url }}"
     dest: "{{ git_repo_dest }}"
     version: "{{ git_repo_version }}"
     depth: "{{ git_repo_depth|default(omit) }}"
-    force: yes
+    force: "{{ git_repo_force|default('no') }}"
 
 - name: chown repo tree
   become: yes
