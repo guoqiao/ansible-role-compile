@@ -1,9 +1,8 @@
 #!/usr/bin/env ansible-playbook
 ---
-- hosts: xbuild
+- hosts: machine
   tasks:
 
-    - name: build vim
-      include_role:
-        name: guoqiao.xbuild
+    - include_role:
+        name: xbuild
         vars_from: vim

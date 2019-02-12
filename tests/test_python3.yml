@@ -1,9 +1,7 @@
 #!/usr/bin/env ansible-playbook
 ---
-- hosts: xbuild
+- hosts: machine
   tasks:
-
-    - name: build python3
-      include_role:
-        name: guoqiao.xbuild
+    - include_role:
+        name: xbuild
         vars_from: python3
